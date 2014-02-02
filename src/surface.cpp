@@ -141,7 +141,7 @@ void Surface::border(int x, int y, int w, int h, char vchar, char hchar, char cc
 }
 
 void Surface::text(int x, int y, std::string text) {
-	for (int i = 0; i < text.length(); i++) {
+	for (uint32_t i = 0; i < text.length(); i++) {
 		this->set(x + i, y, text[i]);
 	}
 }

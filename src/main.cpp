@@ -5,11 +5,6 @@
 
 void testHelloWorld();
 
-int main() {
-	std::cout << "libOnix." << std::endl;
-	testHelloWorld();
-}
-
 std::string vecstr(float x, float y ) {
 	std::stringstream output;
 
