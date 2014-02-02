@@ -6,3 +6,6 @@ default:
 
 clean:
 	rm -rf bin
+	rm -rf src/*.gch
+	rm -rf src/*.bin
+	rm -rf examples/*.bin
