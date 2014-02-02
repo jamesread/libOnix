@@ -110,6 +110,10 @@ void Surface::vline(int x, int y, int l, char fill) {
 	}
 }
 
+void Surface::border() {
+	this->border('|', '-', '+');
+}
+
 void Surface::border(char bchar) {
 	this->border(bchar, bchar);
 }

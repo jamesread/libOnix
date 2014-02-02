@@ -14,6 +14,7 @@ class Surface {
 		char get(int x, int y, char clipChar);
 		void hline(int x, int y, int l, char fill);
 		void vline(int x, int y, int l, char fill);
+		void border();
 		void border(char bchar);
 		void border(char vchar, char hchar);
 		void border(char vchar, char hchar, char cchar);
