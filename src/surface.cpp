@@ -234,6 +234,8 @@ std::string Surface::str() {
 		ret.insert(row * (this->w + 1), "\n");
 	}
 
+	ret.erase(0, 1);
+
 	return ret;
 }
 
