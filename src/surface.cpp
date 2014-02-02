@@ -9,14 +9,18 @@
 
 std::string vecstr(float x, float y);
 
-surface::surface(int w, int h, char fill) {
+Surface::Surface(int w, int h, char fill) {
 	this->w = w;
 	this->h = h;
 	this->fill(fill);
 }
 
-void surface::rot(int oriX, int oriY, int deg, char clipChar) {
-	surface* rotated = new surface(this->getWidth(), this->getHeight(), 'R');
+void Surface::rotate(int deg) {
+	this->rotate(this->w / 2, this->h / 2, deg, ' ');
+}
+
+void Surface::rotate(int oriX, int oriY, int deg, char clipChar) {
+	Surface* rotated = new Surface(this->getWidth(), this->getHeight(), 'R');
 	double rotX, rotY;
 
 	double rad = deg * M_PI / 180.0;
@@ -60,13 +64,13 @@ void surface::rot(int oriX, int oriY, int deg, char clipChar) {
 	this->blit(0, 0, rotated);
 }
 
-void surface::shift(int x, int y) {
-	surface* shifted = new surface(this->getWidth(), this->getHeight(), '!');
+void Surface::shift(int x, int y) {
+	Surface* shifted = new Surface(this->getWidth(), this->getHeight(), '!');
 
 	this->blitQuietly(x, y, shifted);
 }
 
-void surface::replace(char find, char replace) {
+void Surface::replace(char find, char replace) {
 	for (uint32_t i = 0; i < this->map.length(); i++) {
 		if (find == this->map.at(i)) {
 			this->map.replace(i, 1, 1, replace);
@@ -74,63 +78,80 @@ void surface::replace(char find, char replace) {
 	}
 }
 
-void surface::row(int row, std::string content) {
+void Surface::row(int row, std::string content) {
 	for (int i = 0; i < this->w; i++) {
 		this->set(i, row, content.at(i));
 	}
 }
 
-void surface::fill(char fill) {
+void Surface::fill(char fill) {
 	this->map = std::string(this->w * this->h, fill);
 }
 
-int surface::getPos(int x, int y) {
+int Surface::getPos(int x, int y) {
 	return (y * this->w) + x;
 }
 
-void surface::rect(int x, int y, int w, int h, char fill) {
+void Surface::rect(int x, int y, int w, int h, char fill) {
 	for (int row = y; row < y + h; row++) {
 		this->hline(x, row, w, fill);
 	}
 }
 
-void surface::hline(int x, int y, int l, char fill) {
+void Surface::hline(int x, int y, int l, char fill) {
 	for (int i = x; i < (x + l); i++) {
 		this->set(i, y, fill);
 	}
 }
 
-void surface::vline(int x, int y, int l, char fill) {
+void Surface::vline(int x, int y, int l, char fill) {
 	for (int i = y; i < (y + l); i++) {
 		this->set(x, i, fill);
 	}
 }
 
-void surface::border(char bchar) {
+void Surface::border(char bchar) {
 	this->border(bchar, bchar);
 }
 
-void surface::border(char vchar, char hchar) {
-	this->border(0, 0, this->w - 1, this->h - 1, vchar, hchar);
+void Surface::border(char vchar, char hchar) {
+	this->border(vchar, hchar, 0);
 }
 
-void surface::border(int x, int y, int w, int h) {
-	this->border(x, y, w, h, '#', '#');
+void Surface::border(char vchar, char hchar, char cchar) {
+	this->border(0, 0, this->w - 1, this->h - 1, vchar, hchar, cchar);
 }
 
-void surface::border(int x, int y, int w, int h, char vchar, char hchar) {
+void Surface::border(int x, int y, int w, int h) {
+	this->border(x, y, w, h, '#', '#', '#');
+}
+
+void Surface::border(int x, int y, int w, int h, char vchar, char hchar, char cchar) {
 	this->hline(x, y, w + 1, hchar);
 	this->hline(x, y + h, w + 1, hchar);
 	this->vline(x, y + 1, h - 1, vchar);
 	this->vline(x + w, y + 1, h - 1, vchar);
+
+	if (cchar != 0) {
+		this->set(0, 0, cchar);
+		this->set(w, 0, cchar);
+		this->set(0, h, cchar);
+		this->set(w, h, cchar);
+	}
 }
 
-void surface::window(int x, int y, int w, int h) {
+void Surface::text(int x, int y, std::string text) {
+	for (int i = 0; i < text.length(); i++) {
+		this->set(x + i, y, text[i]);
+	}
+}
+
+void Surface::window(int x, int y, int w, int h) {
 	this->rect(x, y, w, h, ' ');
 	this->border(x, y, w, h);
 }
 
-void surface::blitQuietly(int x, int y, surface* source) {
+void Surface::blitQuietly(int x, int y, Surface* source) {
 	int rx, ry;
 
 	for (int sx = 0; sx < source->getWidth(); sx++) {
@@ -146,7 +167,7 @@ void surface::blitQuietly(int x, int y, surface* source) {
 	}
 }
 
-void surface::blit(int x, int y, surface* source) {
+void Surface::blit(int x, int y, Surface* source) {
 	int rx, ry;
 
 	for (int sx = 0; sx < source->getWidth(); sx++) {
@@ -159,7 +180,7 @@ void surface::blit(int x, int y, surface* source) {
 	}
 }
 
-void surface::set(uint32_t pos, char fill) {
+void Surface::set(uint32_t pos, char fill) {
 	if (pos >= this->map.length()) {
 		return;
 //		std::stringstream error;
@@ -170,7 +191,7 @@ void surface::set(uint32_t pos, char fill) {
 	this->map.replace(pos, 1, 1, fill);
 }
 
-void surface::set(int x, int y, char fill) {
+void Surface::set(int x, int y, char fill) {
 	if (this->rangeCheck(x, y, "set")) {
 		int pos = this->getPos(x, y);
 
@@ -178,11 +199,11 @@ void surface::set(int x, int y, char fill) {
 	}
 }
 
-char surface::get(int x, int y) {
+char Surface::get(int x, int y) {
 	return this->get(x, y, '?');
 }
 
-char surface::get(int x, int y, char clipChar) {
+char Surface::get(int x, int y, char clipChar) {
 	if (this->rangeCheck(x, y, "get")) {
 		return this->map.at(this->getPos(x, y));
 	} else {
@@ -190,7 +211,7 @@ char surface::get(int x, int y, char clipChar) {
 	}
 }
 
-bool surface::rangeCheck(int x, int y, std::string title) {
+bool Surface::rangeCheck(int x, int y, std::string title) {
 	if (x < 0 || x >= this->w) {
 		return false;
 	}
@@ -202,11 +223,11 @@ bool surface::rangeCheck(int x, int y, std::string title) {
 	return true;
 }
 
-bool surface::rangeCheck(int x, int y) {
+bool Surface::rangeCheck(int x, int y) {
 	return this->rangeCheck(x, y, "???");
 }
 
-std::string surface::str() {
+std::string Surface::str() {
 	std::string ret = std::string(this->map);
 
 	for (int row = 0; row < this->h; row++) {
@@ -216,14 +237,14 @@ std::string surface::str() {
 	return ret;
 }
 
-std::string surface::rawstr() {
+std::string Surface::rawstr() {
 	return this->map;
 }
 
-int surface::getWidth() {
+int Surface::getWidth() {
 	return this->w;
 }
 
-int surface::getHeight() {
+int Surface::getHeight() {
 	return this->h;
 }

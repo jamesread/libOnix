@@ -1,9 +1,9 @@
 #include <iostream>
 #include <stdint.h>
 
-class surface {
+class Surface {
 	public:
-		surface(int w, int h, char fill);
+		Surface(int w, int h, char fill);
 
 		void fill(char fillChar);
 		void set(int x, int y, char c);
@@ -16,16 +16,19 @@ class surface {
 		void vline(int x, int y, int l, char fill);
 		void border(char bchar);
 		void border(char vchar, char hchar);
+		void border(char vchar, char hchar, char cchar);
 		void border(int x, int y, int w, int h);
-		void border(int x, int y, int w, int h, char vchar, char hchar);
+		void border(int x, int y, int w, int h, char vchar, char hchar, char cchar);
+		void text(int x, int y, std::string txt);
 		void window(int x, int y, int w, int h);
-		void blit(int x, int y, surface* source);
-		void blitQuietly(int x, int y, surface* source);
+		void blit(int x, int y, Surface* source);
+		void blitQuietly(int x, int y, Surface* source);
 
 		void replace(char find, char replace);
 
 		void row(int row, std::string content);
-		void rot(int x, int y, int origin, char clipChar);
+		void rotate(int degrees);
+		void rotate(int x, int y, int deg, char clipChar);
 
 		void shift(int x, int y);
 
