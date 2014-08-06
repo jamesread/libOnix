@@ -7,7 +7,8 @@ A C++ ASCII Libraray
 
 ## Hello World (text) ##
 
-Source code: [helloWorld.cpp](examples/helloWorld.cpp)
+CPP: [helloWorld.cpp](examples/helloWorld.cpp)
+Python(2.7): [helloWorld.py](bindings-python/examples/helloWorld.py)
 
 	+--------------+
 	|..............|
@@ -17,7 +18,8 @@ Source code: [helloWorld.cpp](examples/helloWorld.cpp)
 
 ## Drawing ##
 
-Source code: [drawing.cpp](examples/drawing.cpp)
+CPP Source code: [drawing.cpp](examples/drawing.cpp)
+Python Source Code: [drawing.py](bindings-python/examples/drawing.py)
 
 	+---------+
 	|         |
