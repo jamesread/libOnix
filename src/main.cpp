@@ -5,6 +5,10 @@
 
 void testHelloWorld();
 
+char const* greeting() {
+	return "Salutations, from libOnix.";
+}
+
 std::string vecstr(float x, float y ) {
 	std::stringstream output;
 
