@@ -22,6 +22,8 @@ BOOST_PYTHON_MODULE(pyonix)
 		.def("rect", &Surface::rect)
 		.def("text", &Surface::text)
 		.def("toString", &Surface::str)
+		.def("rotate", (static_cast<void (Surface::*)(int)>(&Surface::rotate)))
+		.def("rotate", (static_cast<void (Surface::*)(int, int, int, char)>(&Surface::rotate)))
 		.def("__str__", &Surface::str)
 	;
 }

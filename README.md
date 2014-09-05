@@ -1,7 +1,7 @@
 libOnix
 =======
 
-A C++ ASCII Libraray
+A C++ ASCII Libraray, with bindings for Python.
 
 #Examples #
 
