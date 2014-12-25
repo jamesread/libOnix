@@ -65,9 +65,9 @@ void Surface::rotate(int oriX, int oriY, int deg, char clipChar) {
 }
 
 void Surface::shift(int x, int y) {
-	Surface* shifted = new Surface(this->getWidth(), this->getHeight(), '!');
+	Surface* shifted = new Surface(this->getWidth(), this->getHeight(), 'S');
 
-	this->blitQuietly(x, y, shifted);
+	this->blit(x, y, shifted);
 }
 
 void Surface::replace(char find, char replace) {
