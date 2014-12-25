@@ -1,5 +1,9 @@
-**/bin
+bin
 **.gch
 **.bin
 **.so
 **/*.swp
+**/*.cmake
+*.cmake
+CMakeFiles
+CMakeCache.txt
