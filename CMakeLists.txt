@@ -6,7 +6,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
 
 add_library(onix SHARED src/surface.cpp src/main.cpp) 
-set(CMAKE_CXX_FLAGS, "${CMAKE_CXX_FLAGS} -Wall -pedantic -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic -std=c++11")
 
 #target_link_libraries(onix)
 
