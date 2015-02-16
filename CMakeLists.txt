@@ -28,5 +28,5 @@ target_link_libraries(example_helloWorld onix)
 add_executable(example_rotations examples/rotations.cpp)
 target_link_libraries(example_rotations onix)
 
-add_executable(example_shift examples/shift.cpp)
-target_link_libraries(example_shift onix)
+#add_executable(example_shift examples/shift.cpp)
+#target_link_libraries(example_shift onix)
