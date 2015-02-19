@@ -11,11 +11,11 @@ A C++ ASCII Libraray, with bindings for Python.
 * Python(2.7): [helloWorld.py](bindings-python/examples/helloWorld.py)
 
 ```
-	+--------------+
-	|..............|
-	|.Hello World!.|
-	|..............|
-	+--------------+
++--------------+
+|..............|
+|.Hello World!.|
+|..............|
++--------------+
 ```
 
 ## Drawing ##
@@ -24,14 +24,14 @@ A C++ ASCII Libraray, with bindings for Python.
 * Python Source Code: [drawing.py](bindings-python/examples/drawing.py)
 
 ```
-	+---------+
-	|         |
-	| #  #    |
-	| #  #  @ |
-	| #==#  * |
-	| #  #  * |
-	| #  #  * |
-	+---------+
++---------+
+|         |
+| #  #    |
+| #  #  @ |
+| #==#  * |
+| #  #  * |
+| #  #  * |
++---------+
 ```
 
 ## Rotations ##
@@ -40,19 +40,19 @@ A C++ ASCII Libraray, with bindings for Python.
 * Python Source Code: [rotations.py](bindings-python/examples/rotations.py)
 
 ```
-	Rotating around: 2:2 by 180
+Rotating around: 2:2 by 180
 
-	Original (5x5):
-	1...2
-	.....
-	..+..
-	.....
-	3...4
+Original (5x5):
+1...2
+.....
+..+..
+.....
+3...4
 
-	Rotated  (5x5):
-	4...3
-	.....
-	..+..
-	.....
-	2...1
+Rotated  (5x5):
+4...3
+.....
+..+..
+.....
+2...1
 ```
