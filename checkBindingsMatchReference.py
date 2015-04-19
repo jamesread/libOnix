@@ -8,6 +8,8 @@ def executeExamples(folder):
 	results = dict();
 
 	for filename in os.listdir(folder):
+		if filename[0] == ".": continue
+
 		example, extension = filename.split(".")
 
 		if os.access(os.path.join(folder, filename), os.X_OK):
@@ -27,7 +29,15 @@ for binding, results in results.items():
 			continue;
 
 		if results[example] != referenceResult:
-			print "Result", example, "for binding:", binding, " is not equal to the reference result. \n\nBinding's version:\n", results[example], "\n\nReference version:\n", referenceResult
+			print "Result", example, "for binding:", binding, " is not equal to the reference result. \n\nBinding's version:\n-----\n", results[example], "\n-----\nReference version:\n-----\n", referenceResult, "\n-----"
+
+			referenceFile = open('checkresult-reference.txt', 'w')
+			referenceFile.write(referenceResult)
+			referenceFile.close()
+
+			resultFile = open('checkresult-binding-' + binding + '.txt', 'w')
+			resultFile.write(results[example])
+			resultFile.close()
 			continue;
 	
 	

@@ -14,3 +14,4 @@ target_link_libraries(pyonix boost_python)
 target_link_libraries(pyonix Onix)
 
 install(TARGETS pyonix DESTINATION "/lib64/python2.7/site-packages/")
+install(TARGETS pyonix DESTINATION "/lib64/python3.3/site-packages/")
