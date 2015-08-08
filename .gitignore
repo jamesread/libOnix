@@ -10,3 +10,5 @@
 Makefile
 pkg
 **/install_manifest.txt
+install_manifest.txt
+checkresult*.txt
