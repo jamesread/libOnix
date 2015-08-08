@@ -11,7 +11,7 @@ include_directories(SYSTEM ../src /usr/include/python2.7)
 add_library(pyonix SHARED src/pysurface.cpp)
 set_target_properties(pyonix PROPERTIES PREFIX "")
 target_link_libraries(pyonix boost_python)
-target_link_libraries(pyonix Onix)
+target_link_libraries(pyonix onix)
 
 install(TARGETS pyonix DESTINATION "/lib64/python2.7/site-packages/")
 install(TARGETS pyonix DESTINATION "/lib64/python3.3/site-packages/")
