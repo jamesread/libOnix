@@ -1,9 +1,17 @@
 #include <iostream>
 #include <stdint.h>
 
+#define NE 0
+#define SE 1
+#define SW 2
+#define NW 3
+
 class Surface {
 	public:
 		Surface(int w, int h, char fill);
+		Surface(int w, int h);
+		Surface(int squareSize);
+
 
 		void fill(char fillChar);
 		void set(int x, int y, char c);
@@ -14,6 +22,9 @@ class Surface {
 		char get(int x, int y, char clipChar);
 		void hline(int x, int y, int l, char fill);
 		void vline(int x, int y, int l, char fill);
+		void dline(int x, int y, int l, char fill, int dir);
+		void sdline(int x, int y, int diagLength, int straightLength, int span, char diagFill, char straightFill, int dir);
+
 		void border();
 		void border(char bchar);
 		void border(char vchar, char hchar);

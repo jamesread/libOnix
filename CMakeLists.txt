@@ -28,5 +28,8 @@ target_link_libraries(example_helloWorld onix)
 add_executable(example_rotations examples/rotations.cpp)
 target_link_libraries(example_rotations onix)
 
-#add_executable(example_shift examples/shift.cpp)
-#target_link_libraries(example_shift onix)
+add_executable(example_planform examples/planform.cpp)
+target_link_libraries(example_planform onix)
+
+add_executable(example_diagonalLines examples/diagonalLines.cpp)
+target_link_libraries(example_diagonalLines onix)

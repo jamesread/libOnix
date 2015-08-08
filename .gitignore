@@ -1,11 +1,12 @@
-bin
+**/bin
 **.gch
 **.bin
 **.so
 **/*.swp
 **/*.cmake
 *.cmake
-CMakeFiles
-CMakeCache.txt
+**/CMakeFiles
+**/CMakeCache.txt
 Makefile
 pkg
+**/install_manifest.txt

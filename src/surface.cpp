@@ -15,6 +15,9 @@ Surface::Surface(int w, int h, char fill) {
 	this->fill(fill);
 }
 
+Surface::Surface(int w, int h) : Surface(w, h, ' ') {}
+Surface::Surface(int squareSize) : Surface(squareSize, squareSize) {}
+
 void Surface::rotate(int deg) {
 	this->rotate(this->w / 2, this->h / 2, deg, ' ');
 }
@@ -107,6 +110,34 @@ void Surface::hline(int x, int y, int l, char fill) {
 void Surface::vline(int x, int y, int l, char fill) {
 	for (int i = y; i < (y + l); i++) {
 		this->set(x, i, fill);
+	}
+}
+
+void Surface::sdline(int x, int y, int diagLength, int straightLength, int span, char diagFill, char straightFill, int dir) {
+	int cx = x;
+	int cy = y;
+
+	for (int cspan = 0; cspan < span; ) {
+		switch (dir) {
+			case SW:
+				this->hline(cx - straightLength, cy, straightLength, straightFill);
+				this->set(cx, cy, diagFill);
+
+			case SE: break;
+		}
+		
+		cspan += diagLength;
+	}
+}
+
+void Surface::dline(int x, int y, int l, char fill, int dir) {
+	for (int i = 0; i < l; i++) {
+		switch (dir) {
+			case SW: this->set(x - i, y + i, fill); break;
+			case SE: this->set(x + i, y + i, fill); break;
+			case NE: this->set(x + i, y - i, fill); break;
+			case NW: this->set(x - i, y - i, fill); break;
+		}
 	}
 }
 

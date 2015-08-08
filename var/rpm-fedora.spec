@@ -10,7 +10,7 @@ Source0:	libOnix-%{version}-src.zip
 
 BuildRequires:	cmake
 
-%description
+%description 
 A 2d text graphics library.
 
 %prep
