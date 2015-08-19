@@ -1,5 +1,9 @@
 <project name = "libOnix" default = "build">
-	<property name = "version" value = "1.0.0" />
+	<exec executable = "buildid">
+		<arg value = "-n" />
+	</exec>
+	<loadproperties srcFile = ".buildid.ini" />
+	<echo>Version: ${version.formatted.short}</echo>
 
 	<target name = "clean">
 		<delete dir = "bin" />
@@ -15,19 +19,19 @@
 
 		<exec executable = "make" />
 
-		<zip destfile = "pkg/libOnix-${version}.zip">
-			<zipfileset dir = "bin" prefix = "libOnix-${version}" />
+		<zip destfile = "pkg/libOnix-${version.formatted.short}.zip">
+			<zipfileset dir = "bin" prefix = "libOnix-${version.formatted.short}" />
 		</zip>
 	</target>
 
 	<target name = "source-archive">
-		<zip destfile = "pkg/libOnix-${version}-src.zip"> 
-			<zipfileset dir = "src" prefix = "libOnix-${version}/src" />
-			<zipfileset dir = "examples" prefix = "libOnix-${version}/examples" />
-			<zipfileset file = "CMakeLists.txt" prefix = "libOnix-${version}/" />
-			<zipfileset file = "README.md" prefix = "libOnix-${version}/" />
+		<zip destfile = "pkg/libOnix-${version.formatted.short}-src.zip"> 
+			<zipfileset dir = "src" prefix = "libOnix-${version.formatted.short}/src" />
+			<zipfileset dir = "examples" prefix = "libOnix-${version.formatted.short}/examples" />
+			<zipfileset file = "CMakeLists.txt" prefix = "libOnix-${version.formatted.short}/" />
+			<zipfileset file = "README.md" prefix = "libOnix-${version.formatted.short}/" />
 		</zip>
 
-		<copy file = "pkg/libOnix-${version}-src.zip" todir = "${user.home}/rpmbuild/SOURCES/" />
+		<copy file = "pkg/libOnix-${version.formatted.short}-src.zip" todir = "${user.home}/rpmbuild/SOURCES/" />
 	</target>
 </project>
